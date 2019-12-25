@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<time.h>
 
-int i,j,n,ch;
+int i,j,n,ch,c;
 
 int binary();
 int print();
@@ -78,13 +78,31 @@ int binary(int arr[]){
     if (first > last){
             printf("Not Found\n");
         }
+    printf("\n");
+    int cl = clock();
+    double cll  = ((double)cl)/CLOCKS_PER_SEC;
+    printf("Binary search time : %f Seconds\n",cll);
     
 }
 int linear(int arr[]){
-
+    int pos = 0;
+    int num;
+    printf("Enter to search Num:\n");
+    scanf("%d",&num);
+    for(i=0;i<100;i++){
+        if (arr[i] == num){
+            pos = i;
+            printf("%d Found at %d.\n",num,pos);
+            int cl = clock();
+            double cll  = ((double)cl)/CLOCKS_PER_SEC;
+            printf("Linear search time : %f Seconds\n",cll);
+        }
+        
+    }
 }
 int print(int arr[]){
     for (i = 0; i < 100; i++){
         printf("Element - %d : %d \n",i,arr[i]);
+
     }
 }
