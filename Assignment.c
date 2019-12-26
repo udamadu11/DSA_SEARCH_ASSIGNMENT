@@ -1,12 +1,16 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#include<math.h>
 
 int i,j,n,ch,c;
 
 int binary();
 int print();
 int linear();
+int interpoloation();
+int jump();
+
 int main(){
     int arr[100];
     int temp;
@@ -26,17 +30,24 @@ int main(){
         }
         
     }
+    printf("----------------------------------------------------------------------------\n");
+    printf("-                                                                          -\n");
+    printf("-                          DSA ASSIGNMENT                                  -\n");
+    printf("-                                                                          -\n");
+    printf("-       BINARY_SEARCH   LINEAR_SEARCH JUMP_SEARCH INTERPOLATION_SEARCH     -\n");
+    printf("----------------------------------------------------------------------------\n");
     printf("\n");
     int cl = clock();
     double cll  = ((double)cl)/CLOCKS_PER_SEC;
-    printf("Sorting time to Execute : %f Seconds\n",cll);
-
+    printf("Array Sorting time to Execute : %f Seconds\n",cll);
+    printf("\n");
+    printf("\n");
     while(1){
     
     printf("1.Binary Search\n");
     printf("2.Linear Search\n");
-    printf("3.Jump Search\n");
-    printf("4.Binary Search\n");
+    printf("3.Interpolation Search\n");
+    printf("4.Jump Search\n");
     printf("5.Print Array\n");
     printf("5.Exit\n\n");
 
@@ -48,7 +59,11 @@ int main(){
                 break;
         case 2: linear(arr);
                 break;
-        case 3: print(arr);
+        case 3: interpolation(arr);
+                break;
+        case 4: jump(arr);
+                break;
+        case 5: print(arr);
                 break;
         default: printf("Invalid Choice !!!\n");  
         }
@@ -96,6 +111,56 @@ int linear(int arr[]){
             int cl = clock();
             double cll  = ((double)cl)/CLOCKS_PER_SEC;
             printf("Linear search time : %f Seconds\n",cll);
+        }
+        
+    }
+}
+int interpolation(int arr[]){
+    int l = 0 , h = 100 - 1, middle,num;
+    printf("Enter number to search :\n");
+    scanf("%d",&num);
+    while(arr[h] != arr[l] && num >= arr[l] && num <= arr[h] ){
+        middle = l +((num - arr[l]) * (h - l) / (arr[h] - arr[l]) );
+
+        if ( num == arr[middle]){
+            printf("Element Found At %d\n",middle);
+            printf("\n");
+            int cl = clock();
+            double cll  = ((double)cl)/CLOCKS_PER_SEC;
+            printf("Interpolation search time : %f Seconds\n",cll);
+            break;
+        }
+        else if(num  < arr[middle]){
+            h = middle - 1;
+        }
+        else{
+             l  = middle +1;
+        }
+    }
+}
+int jump(int arr[]){
+    int i,num,s,e,jump;
+    printf("Enter number to search :\n");
+    scanf("%d",&num);
+
+    jump = sqrt(100);
+    s = 0;
+    e = s + jump;
+
+    while(e < 100 && arr[e] <= num){
+        s = e;
+        e += jump;
+        if(e > 100 -1){
+            e = 100;
+        }
+    }
+    for(i = s ; i < e ; i++ ){
+        if (arr[i] == num){
+            printf("Found At %d\n",i);
+            printf("\n");
+            int cl = clock();
+            double cll  = ((double)cl)/CLOCKS_PER_SEC;
+            printf("Interpolation search time : %f Seconds\n",cll);
         }
         
     }
